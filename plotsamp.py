@@ -1,0 +1,46 @@
+import plotly.plotly as py
+
+import pandas as pd
+
+df = pd.read_csv('data/winequality-red.csv', sep=';')
+dfgood = df[df.quality>=6].head()
+dfpoor = df[df.quality<6].head()
+df.head(2)
+
+fig1 = {
+    'data': [
+		{
+  			'x': dfgood.quality,
+        	'y': dfgood.alcohol
+	},
+	{
+        	'x': dfgood.quality, 
+        	'y': dfgood.alcohol
+	}
+    ],
+    'layout': {
+        'xaxis': {'title': 'Quality', 'type': 'log'},
+        'yaxis': {'title': "pH value"}
+    }
+}
+
+fig2 = {
+    'data': [
+                {
+                        'x': dfgood.quality,
+                'y': dfgood.alcohol
+        },
+        {
+                'x': dfgood.quality,
+                'y': dfgood.alcohol
+        }
+    ],
+    'layout': {
+        'xaxis': {'title': 'Quality', 'type': 'log'},
+        'yaxis': {'title': "pH value"}
+    }
+}
+fig=(fig1,fig2)
+py.plot(fig, filename='wine-scatter',sharing='public')
+
+
